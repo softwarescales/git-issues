@@ -17,7 +17,7 @@
         "git-issues": "./bin/git-issues"
     },
     "author": "Gabriel Petrovay <gabipetrovay@gmail.com>",
-    "license": "BSD",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/softwarescales/git-issues/issues"
     },
