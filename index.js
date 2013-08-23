@@ -33,10 +33,6 @@ var CONFIG = {
         https: /^https:\/\/(.+@)?(.+)(\.com|\.org)\/(.+)\/(.+)\.git$/,
         git: /^git:\/\/(.+@)?(.+)(\.com|\.org)\/(.+)\/(.+)\.git$/
     },
-    issueApiUrlFormats: {
-        'github': 'https://api.github.com/repos/%s/%s/issues',
-        'bitbubket': 'https://bitbucket.org/api/1.0/repositories/%s/%s/issues'
-    },
     issueFormatString: '| %s | %s | %s |'
 };
 
@@ -61,7 +57,7 @@ if (user !== undefined && typeof user !== 'string' || user === '') {
 
 // extract and validate the source (github/bitbucket), owner, and name from the repo URL
 var son = extractSONFromFromUrl(argv['repo']);
-if (['github', 'bitbubket'].indexOf(son.source) === -1) {
+if (['github', 'bitbucket'].indexOf(son.source) === -1) {
     console.error('Repository source not supported: ' + son.source);
     process.exit(11);
 }
@@ -112,13 +108,23 @@ function issuesCallback(err, issues) {
 
 function getIssues(son, user, pass, callback) {
 
-    var urlFormat = CONFIG.issueApiUrlFormats[son.source];
-    if (!urlFormat) {
+    var provider;
+
+    try {
+        provider = require('./providers/' + son.source);
+    } catch (err) {}
+
+    if (!provider) {
+        return callback('Provider not suppoerted: ' + son.source);
+    }
+
+    var repoIssueUrl = provider.getIssueApiUrl(son, { closed: false });
+    if (!repoIssueUrl) {
         return callback('Missing issue API url format for source: ' + son.source);
     }
 
     var options = {
-        url: util.format(urlFormat, son.owner, son.name),
+        url: repoIssueUrl,
         json: true
     };
 
@@ -131,7 +137,7 @@ function getIssues(son, user, pass, callback) {
     }
 
     // fetch the issues from the web
-    request.get(options, function(err, response, issues) {
+    request.get(options, function(err, response, issueRespose) {
 
         if (err) {
             return callback(err);
@@ -141,9 +147,9 @@ function getIssues(son, user, pass, callback) {
             return callback('Authentication failed');
         }
 
-        // TODO convert form provider format to a common nternal one
-
-        callback(null, issues);
+        // we convert the issues in a common format
+        // (I took the GitHub format as example)
+        callback(null, provider.convertIssues(issueRespose));
     });
 }
 
