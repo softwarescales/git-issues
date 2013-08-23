@@ -53,10 +53,7 @@ issues for repo: git@github.com:softwarescales/git-issues.git
 
 ## Change Log
 
-#### 0.5.1
-
-- added binary script such that the `git issues` command works automatically when installing this module globally: `npm install -g git-issues`
-
 #### 0.5.0
 
 - initial version with support for GitHub and listing in a table format
+- binary script that works for global installations: `npm install -g git-issues`
