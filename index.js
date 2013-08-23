@@ -5,6 +5,8 @@ var argv = require('optimist')
     .alias('username', 'u')
     .alias('password', 'p')
     .alias('repo', 'r')
+    .alias('status', 's')
+    .default('status', 'open')
     .argv;
 
 /**************************************************************************/
@@ -43,6 +45,12 @@ CONFIG.separatorLine = new Array((util.format(CONFIG.issueFormatString, CONFIG.n
 
 /**************************************************************************/
 
+var status = argv['status'];
+var stati = ['closed', 'open'];
+if (stati.indexOf(status) === -1) {
+    console.error('Invalid status choose one of: ' + stati.join(', '));
+    process.exit(4);
+}
 
 prompt.override = argv;
 prompt.message = '';
@@ -118,7 +126,7 @@ function getIssues(son, user, pass, callback) {
         return callback('Provider not suppoerted: ' + son.source);
     }
 
-    var repoIssueUrl = provider.getIssueApiUrl(son, { closed: false });
+    var repoIssueUrl = provider.getIssueApiUrl(son, { status: status });
     if (!repoIssueUrl) {
         return callback('Missing issue API url format for source: ' + son.source);
     }
