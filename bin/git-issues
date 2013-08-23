@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REPO_DIR=`git rev-parse --show-toplevel`
+if [ $? -gt 0 ]
+then
+    exit
+fi
+
+GIT_URL=`git config --get remote.origin.url`
+
+INSTALLED_LOCATION=$0
+INSTALLED_DIR=`dirname "$INSTALLED_LOCATION"`
+
+if [ -L "$INSTALLED_LOCATION" ]
+then
+    INSTALLED_LOCATION=`readlink "$INSTALLED_LOCATION"`
+    # readlink returns a relative path
+    INSTALLED_DIR=`dirname "$0"`/`dirname "$INSTALLED_LOCATION"`
+fi
+
+node "$INSTALLED_DIR/../index.js" $@ --repo "$GIT_URL"
+
