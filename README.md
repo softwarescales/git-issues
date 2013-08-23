@@ -46,12 +46,22 @@ issues for repo: git@github.com:softwarescales/git-issues.git
 ---------------------------------------------------------------------------------------
 ```
 
+### Arguments
+
+- `username|u`: the Git provider username (mandatory for private repositories or private issue trackers)
+- `password|p`: the Git provider user password (considered only if the `username` is provided)
+- `status|s`: the type of issues to return. Must be one of: `open` (default), `closed`
+
 ## Git Providers
 
-- currently only **GitHub** issues are supported
-- TODO: add BitBucket issue support
+- both **GitHub** and **BitBucket** repositories are supported
 
 ## Change Log
+
+#### 0.5.1
+
+- added support for BitBucket
+- added command line issue status filtering (`open` and `close`)
 
 #### 0.5.0
 
