@@ -29,6 +29,7 @@ var argv = require('optimist')
     .alias('status', 's')
     .default('status', 'open')
     .argv;
+var Table = require("cli-table");
 
 /**************************************************************************/
 /* CONFIGURATION                                                          */
@@ -121,14 +122,17 @@ function issuesCallback(err, issues) {
         process.exit(0);
     }
 
-    printHeader();
+    var table = new Table({
+        head: ["#", "Title", "Status"],
+        colWidths: [10, 200, 15]
+    });
 
     for (var i in issues) {
-        printIssue(issues[i]);
-        //console.log(issues[i]);
+        var cI = issues[i];
+        table.push([cI.number, cI.title, cI.state.toUpperCase()]);
     }
 
-    printFooter();
+    console.log(table.toString());
 }
 
 /**************************************************************************/
