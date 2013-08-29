@@ -186,30 +186,6 @@ function getIssues(son, user, pass, callback) {
     });
 }
 
-function printIssue(issue) {
-
-    var number = (CONFIG.numberSpaces + issue.number).substr(-CONFIG.numberLength);
-
-    var title = issue.title;
-    title = title.length > CONFIG.titleLength ? title.substr(0, CONFIG.titleLength - CONFIG.longValueSuffix.length) + CONFIG.longValueSuffix : title;
-    title = (title + CONFIG.titleSpaces).substr(0, CONFIG.titleLength);
-
-    var state = (issue.state.toUpperCase() + CONFIG.stateSpaces).substr(0, CONFIG.stateLength);
-
-    console.log(CONFIG.issueFormatString, number, title, state);
-}
-
-function printHeader() {
-    console.log('issues for repo: ' + argv['repo']);
-    console.log(CONFIG.separatorLine);
-    printIssue({ number: '#', title: 'Title', state: 'Status' });
-    console.log(CONFIG.separatorLine);
-}
-
-function printFooter() {
-    console.log(CONFIG.separatorLine);
-}
-
 function extractSONFromFromUrl(url) {
 
     var match = url.match(/^(.{3,5}):\/\//);
