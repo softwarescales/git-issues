@@ -17,6 +17,12 @@
         "git-issues": "./bin/git-issues"
     },
     "author": "Gabriel Petrovay <gabipetrovay@gmail.com>",
+    "contributors": [
+        {
+            "name": "Ionică Bizău",
+            "email": "bizauionica@gmail.com"
+        }
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/softwarescales/git-issues/issues"
