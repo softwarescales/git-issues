@@ -22,6 +22,7 @@
         "url": "https://github.com/softwarescales/git-issues/issues"
     },
     "dependencies"   : {
+        "cli-table"     : "*",
         "optimist"      : "*",
         "prompt"        : "*",
         "request"       : "*"
