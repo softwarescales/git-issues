@@ -36,10 +36,6 @@ var Table = require("cli-table");
 /**************************************************************************/
 
 var CONFIG = {
-    numberLength: 5,
-    titleLength: 60,
-    stateLength: 12,
-    longValueSuffix: ' …',
     promptSchema: {
         properties: {
             username: {
@@ -59,11 +55,6 @@ var CONFIG = {
     },
     issueFormatString: '| %s | %s | %s |'
 };
-
-CONFIG.numberSpaces = new Array(CONFIG.numberLength + 1).join(' ');
-CONFIG.titleSpaces = new Array(CONFIG.titleLength + 1).join(' ');
-CONFIG.stateSpaces = new Array(CONFIG.stateLength + 1).join(' ');
-CONFIG.separatorLine = new Array((util.format(CONFIG.issueFormatString, CONFIG.numberSpaces, CONFIG.titleSpaces, CONFIG.stateSpaces)).length + 1).join('-');
 
 /**************************************************************************/
 
