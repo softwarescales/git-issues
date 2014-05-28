@@ -106,7 +106,7 @@ if (user && !argv['password']) {
     });
 } else {
     // fetch and print the issues
-    getIssues(son, user, !argv['password'], issuesCallback);
+    getIssues(son, user, argv['password'], issuesCallback);
 }
 
 function issuesCallback(err, issues) {
