@@ -154,7 +154,10 @@ function getIssues(son, user, pass, callback) {
 
     var options = {
         url: repoIssueUrl,
-        json: true
+        json: true,
+        headers: {
+            'user-agent': 'git-issues NPM Module'
+        }
     };
 
     // if a user is provided we
