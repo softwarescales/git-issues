@@ -173,7 +173,7 @@ function getIssues(son, user, pass, callback) {
         }
 
         if (response.statusCode != 200) {
-            return callback('Authentication failed');
+            return callback('Authentication failed: ' + issueRespose);
         }
 
         // we convert the issues in a common format
