@@ -29,24 +29,24 @@ var argv = require('optimist')
     .alias('status', 's')
     .default('status', 'open')
     .argv;
-var couleurs = require("couleurs")();
-var Table = require("le-table");
+var couleurs = require('couleurs')();
+var Table = require('le-table');
 // Table defaults
 Table.defaults.marks = {
-    nw: "┌"
-  , n:  "─"
-  , ne: "┐"
-  , e:  "│"
-  , se: "┘"
-  , s:  "─"
-  , sw: "└"
-  , w:  "│"
-  , b: " "
-  , mt: "┬"
-  , ml: "├"
-  , mr: "┤"
-  , mb: "┴"
-  , mm: "┼"
+    nw: '┌'
+  , n:  '─'
+  , ne: '┐'
+  , e:  '│'
+  , se: '┘'
+  , s:  '─'
+  , sw: '└'
+  , w:  '│'
+  , b:  ' '
+  , mt: '┬'
+  , ml: '├'
+  , mr: '┤'
+  , mb: '┴'
+  , mm: '┼'
 };
 
 /**************************************************************************/
@@ -133,9 +133,9 @@ function issuesCallback(err, issues) {
 
     var table = new Table();
     table.addRow([
-        couleurs.fg("#", "#2980b9"),
-        couleurs.fg("Title", "#2980b9"),
-        couleurs.fg("Status", "#2980b9")
+        couleurs.bold('#'),
+        couleurs.bold('Title'),
+        couleurs.bold('Status')
     ]);
 
     issues.sort(function (a, b) {
@@ -195,7 +195,7 @@ function getIssues(son, user, pass, callback) {
         }
 
         if (response.statusCode != 200) {
-            return callback(issueRespose.error || "Error: " + JSON.stringify(issueRespose));
+            return callback(issueRespose.error || 'Error: ' + JSON.stringify(issueRespose));
         }
 
         // we convert the issues in a common format
