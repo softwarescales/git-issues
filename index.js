@@ -29,7 +29,25 @@ var argv = require('optimist')
     .alias('status', 's')
     .default('status', 'open')
     .argv;
-var Table = require("cli-table");
+var couleurs = require("couleurs")();
+var Table = require("le-table");
+// Table defaults
+Table.defaults.marks = {
+    nw: "┌"
+  , n:  "─"
+  , ne: "┐"
+  , e:  "│"
+  , se: "┘"
+  , s:  "─"
+  , sw: "└"
+  , w:  "│"
+  , b: " "
+  , mt: "┬"
+  , ml: "├"
+  , mr: "┤"
+  , mb: "┴"
+  , mm: "┼"
+};
 
 /**************************************************************************/
 /* CONFIGURATION                                                          */
@@ -113,14 +131,16 @@ function issuesCallback(err, issues) {
         process.exit(0);
     }
 
-    var table = new Table({
-        head: ["#", "Title", "Status"],
-        colWidths: [10, 200, 15]
-    });
+    var table = new Table();
+    table.addRow([
+        couleurs.fg("#", "#2980b9"),
+        couleurs.fg("Title", "#2980b9"),
+        couleurs.fg("Status", "#2980b9")
+    ]);
 
     for (var i in issues) {
         var cI = issues[i];
-        table.push([cI.number, cI.title, cI.state.toUpperCase()]);
+        table.addRow([cI.number, cI.title, cI.state.toUpperCase()]);
     }
 
     console.log(table.toString());
