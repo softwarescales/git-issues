@@ -61,6 +61,11 @@ Password:
  - both **GitHub** and **BitBucket** repositories are supported
 
 ## Changelog
+### `0.6.0`
+ - replaced ASCII table logic with [`le-table`](https://github.com/IonicaBizau/node-le-table)
+ - sort issues
+ - send `user-agent` header
+
 ### `0.5.1`
  - added support for BitBucket
  - added command line issue status filtering (`open` and `close`)
