@@ -138,6 +138,10 @@ function issuesCallback(err, issues) {
         couleurs.fg("Status", "#2980b9")
     ]);
 
+    issues.sort(function (a, b) {
+        return a.number > b.number;
+    });
+
     for (var i in issues) {
         var cI = issues[i];
         table.addRow([cI.number, cI.title, cI.state.toUpperCase()]);
