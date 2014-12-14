@@ -1,29 +1,40 @@
 {
-    "name": "git-issues",
-    "version": "0.5.1",
-    "description": "Git issues extension to list issues of a Git project",
-    "main": "index.js",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/softwarescales/git-issues.git"
-    },
-    "keywords": [
-        "git",
-        "issues",
-        "github",
-        "bitbucket"
-    ],
-    "bin": {
-        "git-issues": "./bin/git-issues"
-    },
-    "author": "Gabriel Petrovay <gabipetrovay@gmail.com>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/softwarescales/git-issues/issues"
-    },
-    "dependencies"   : {
-        "optimist"      : "*",
-        "prompt"        : "*",
-        "request"       : "*"
-    }
+  "name": "git-issues",
+  "version": "0.6.0",
+  "description": "Git issues extension to list issues of a Git project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/softwarescales/git-issues.git"
+  },
+  "keywords": [
+    "git",
+    "issues",
+    "github",
+    "bitbucket"
+  ],
+  "bin": {
+    "git-issues": "./bin/git-issues"
+  },
+  "author": "Gabriel Petrovay <gabipetrovay@gmail.com>",
+  "contributors": [
+    "Ionică Bizău <bizauionica@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/softwarescales/git-issues/issues"
+  },
+  "homepage": "https://github.com/softwarescales/git-issues",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cli-table": "0.3.1",
+    "le-table": "2.0.0",
+    "couleurs": "2.0.0",
+    "prompt": "0.2.14",
+    "optimist": "0.6.1",
+    "request": "2.51.0"
+  },
+  "devDependencies": {}
 }
