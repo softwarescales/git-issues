@@ -98,7 +98,7 @@ if (user && !argv['password']) {
     });
 } else {
     // fetch and print the issues
-    getIssues(son, user, !argv['password'], issuesCallback);
+    getIssues(son, user, argv['password'], issuesCallback);
 }
 
 function issuesCallback(err, issues) {
@@ -149,7 +149,10 @@ function getIssues(son, user, pass, callback) {
 
     var options = {
         url: repoIssueUrl,
-        json: true
+        json: true,
+        headers: {
+            'user-agent': 'git-issues NPM Module'
+        }
     };
 
     // if a user is provided we
