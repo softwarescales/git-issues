@@ -29,12 +29,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cli-table": "0.3.1",
-    "le-table": "2.0.0",
-    "couleurs": "2.0.0",
+    "le-table": "2.1.0",
+    "couleurs": "3.0.0",
     "prompt": "0.2.14",
     "optimist": "0.6.1",
-    "request": "2.51.0"
+    "request": "2.55.0",
+    "giturlparse": "1.2.0"
   },
   "devDependencies": {}
 }

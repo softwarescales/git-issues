@@ -10,6 +10,7 @@ var argv = require('optimist')
     .argv;
 var couleurs = require('couleurs')();
 var Table = require('le-table');
+var GitUrlParse = require('giturlparse');
 
 // Table defaults
 Table.defaults.marks = {
@@ -45,13 +46,7 @@ var CONFIG = {
                 hidden: true
             }
         }
-    },
-    validRepoUrls: {
-        ssh: /^(.+)@(.+)(\.com|\.org):(.+)\/(.+)\.git$/,
-        https: /^https:\/\/(.+@)?(.+)(\.com|\.org)\/(.+)\/(.+)\.git$/,
-        git: /^git:\/\/(.+@)?(.+)(\.com|\.org)\/(.+)\/(.+)\.git$/
-    },
-    issueFormatString: '| %s | %s | %s |'
+    }
 };
 
 /**************************************************************************/
@@ -186,26 +181,15 @@ function getIssues(son, user, pass, callback) {
 
 function extractSONFromFromUrl(url) {
 
-    var match = url.match(/^(.{3,5}):\/\//);
-    var proto = 'ssh';
 
-    if (match) {
-        proto = match[1];
-    }
-
-    if (!CONFIG.validRepoUrls[proto]) {
-        console.error('Repository URL protocol not supported: ' + proto);
+    var parsed = GitUrlParse(url);
+    if (!parsed.source || !parsed.owner || !parsed.name) {
+        console.error('Repository URL not supported: ' + parsed._);
         process.exit(11);
     }
 
-    match = url.match(CONFIG.validRepoUrls[proto]);
-    var son = {
-        source: match[2].toLowerCase(),
-        owner: match[4],
-        name: match[5]
-    };
-
-    return son;
+    parsed.source = parsed.source.toLowerCase();
+    return parsed;
 }
 
 /**************************************************************************/
