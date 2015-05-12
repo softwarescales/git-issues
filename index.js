@@ -188,7 +188,7 @@ function extractSONFromFromUrl(url) {
         process.exit(11);
     }
 
-    parsed.source = parsed.source.toLowerCase();
+    parsed.source = parsed.source.toLowerCase().replace(/\.com$/g, "");
     return parsed;
 }
 
