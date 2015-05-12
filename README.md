@@ -59,17 +59,3 @@ Password:
 
 ## Git Providers
  - both **GitHub** and **BitBucket** repositories are supported
-
-## Changelog
-### `0.6.0`
- - replaced ASCII table logic with [`le-table`](https://github.com/IonicaBizau/node-le-table)
- - sort issues
- - send `user-agent` header
-
-### `0.5.1`
- - added support for BitBucket
- - added command line issue status filtering (`open` and `close`)
-
-### `0.5.0`
- - initial version with support for GitHub and listing in a table format
- - binary script that works for global installations: `npm install -g git-issues`
