@@ -50,6 +50,8 @@ var CONFIG = {
     }
 };
 
+var configFilePath = __dirname + "/.git-issues-config.json";
+
 /**************************************************************************/
 
 var status = argv['status'];
@@ -77,28 +79,40 @@ if (['github', 'bitbucket'].indexOf(son.source) === -1) {
     process.exit(11);
 }
 
-// if a user is provided, we also need a password for the basic authentication
-if (user && !argv['password']) {
+//if json config file exists, use its credentials.
 
-    prompt.get(CONFIG.promptSchema, function(err, result) {
+if (fs.existsSync(configFilePath)) {
+    var credentialConfig = require(configFilePath);
+    console.log("config file found for username: " + credentialConfig.username);
+    getIssues(son, credentialConfig.username, credentialConfig.password, issuesCallback);
 
-        if (err) {
-            console.error(err);
-            process.exit(2);
-        }
-
-        // fetch and print the issues
-        getIssues(son, user, result.password, issuesCallback);
-    });
-} else {
-    // fetch and print the issues
-    getIssues(son, user, argv['password'], issuesCallback);
 }
+else {
+    console.log("no config file found");
 
+
+    // if a user is provided, we also need a password for the basic authentication
+    if (user && !argv['password']) {
+
+        prompt.get(CONFIG.promptSchema, function (err, result) {
+
+            if (err) {
+                console.error(err);
+                process.exit(2);
+            }
+
+            // fetch and print the issues
+            getIssues(son, user, result.password, issuesCallback);
+        });
+    } else {
+        // fetch and print the issues
+        getIssues(son, user, argv['password'], issuesCallback);
+    }
+}
 function issuesCallback(err, issues) {
 
     if (err) {
-        console.error(err);
+        console.error( err);
         process.exit(3);
     }
 
@@ -139,10 +153,11 @@ function getIssues(son, user, pass, callback) {
     } catch (err) {}
 
     if (!provider) {
-        return callback('Provider not suppoerted: ' + son.source);
+        return callback('Provider not supported: ' + son.source);
     }
 
     var repoIssueUrl = provider.getIssueApiUrl(son, { status: status });
+    
     if (!repoIssueUrl) {
         return callback('Missing issue API url format for source: ' + son.source);
     }
@@ -156,16 +171,18 @@ function getIssues(son, user, pass, callback) {
     };
 
     // if a user is provided we
+     
     if (user) {
         options.auth = {
             user: user,
             pass: pass
         };
     }
+    
 
     // fetch the issues from the web
     request.get(options, function(err, response, issueRespose) {
-
+       
         if (err) {
             return callback(err);
         }
@@ -184,12 +201,14 @@ function extractSONFromFromUrl(url) {
 
 
     var parsed = GitUrlParse(url);
+    
     if (!parsed.source || !parsed.owner || !parsed.name) {
         console.error('Repository URL not supported: ' + parsed._);
         process.exit(11);
     }
 
     parsed.source = parsed.source.toLowerCase().replace(/\.com$/g, "");
+    
     return parsed;
 }
 

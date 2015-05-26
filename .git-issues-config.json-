@@ -1,0 +1,7 @@
+//rename this file to .git-issues-config.json
+//and change the values.
+
+{
+	"username" : "yourusername",
+	"password" : "yourpassword"
+}
