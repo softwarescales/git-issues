@@ -11,7 +11,8 @@ var argv = require('optimist')
 var couleurs = require('couleurs')();
 var Table = require('le-table');
 var GitUrlParse = require('giturlparse');
-var fs = require('fs');
+var ul = require('ul');
+var isThere = require('is-there');
 
 // Table defaults
 Table.defaults.marks = {
@@ -50,7 +51,7 @@ var CONFIG = {
     }
 };
 
-var configFilePath = __dirname + "/.git-issues-config.json";
+var configFilePath = ul.USER_DIR + "/.git-issues-config.json";
 
 /**************************************************************************/
 
@@ -81,7 +82,7 @@ if (['github', 'bitbucket'].indexOf(son.source) === -1) {
 
 //if json config file exists, use its credentials.
 
-if (fs.existsSync(configFilePath)) {
+if (isThere(configFilePath)) {
     var credentialConfig = require(configFilePath);
     console.log("config file found for username: " + credentialConfig.username);
     getIssues(son, credentialConfig.username, credentialConfig.password, issuesCallback);
