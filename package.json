@@ -24,6 +24,10 @@
     {
       "name": "Ionică Bizău",
       "email": "bizauionica@gmail.com"
+    },
+    {
+      "name" : "Arno Chauveau",
+      "email" : "arnochauveau@gmail.com" 
     }
   ],
   "license": "MIT",
