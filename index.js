@@ -11,6 +11,7 @@ var argv = require('optimist')
 var couleurs = require('couleurs')();
 var Table = require('le-table');
 var GitUrlParse = require('giturlparse');
+var fs = require('fs');
 
 // Table defaults
 Table.defaults.marks = {
