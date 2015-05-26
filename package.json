@@ -44,9 +44,7 @@
     "prompt": "0.2.14",
     "optimist": "0.6.1",
     "request": "2.55.0",
-    "giturlparse": "1.2.0",
-    "ul":"2.10.1", 
-    "is-there" : "2.10.1"
+    "giturlparse": "1.2.0"
   },
   "devDependencies": {},
   "gitHead": "d73b98a25ce7a7f47ca71c3b13e5a49d3bdb97a2",
