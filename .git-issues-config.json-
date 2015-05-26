@@ -1,6 +1,6 @@
 //rename this file to .git-issues-config.json
 //and change the values.
-
+//Also remove these comments
 {
 	"username" : "yourusername",
 	"password" : "yourpassword"
