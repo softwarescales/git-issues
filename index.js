@@ -5,6 +5,8 @@ var argv = require('optimist')
     .alias('username', 'u')
     .alias('password', 'p')
     .alias('repo', 'r')
+    .alias('file','f')
+    .boolean('f')
     .alias('status', 's')
     .default('status', 'open')
     .argv;
@@ -13,6 +15,7 @@ var Table = require('le-table');
 var GitUrlParse = require('giturlparse');
 var ul = require('ul');
 var isThere = require('is-there');
+var fs = require('fs');
 
 // Table defaults
 Table.defaults.marks = {
@@ -84,8 +87,8 @@ if (['github', 'bitbucket'].indexOf(son.source) === -1) {
 
 if (isThere(configFilePath)) {
     var credentialConfig = require(configFilePath);
-    console.log("config file found for username: " + credentialConfig.username);
-    getIssues(son, credentialConfig.username, credentialConfig.password, issuesCallback);
+    console.log("config file found for username: " + credentialConfig.user);
+    getIssues(son, credentialConfig.user, credentialConfig.pass, issuesCallback);
 
 }
 else {
@@ -172,15 +175,27 @@ function getIssues(son, user, pass, callback) {
     };
 
     // if a user is provided we
-     
-    if (user) {
+     if (user) {
         options.auth = {
             user: user,
             pass: pass
         };
     }
     
-
+    if (argv['f']) {
+        if (options.auth) {  
+            fs.writeFile(configFilePath, JSON.stringify(options.auth) , function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("Config file generated");
+            });     
+        }
+        else {
+            console.error('no username and/or password supplied, impossible to make config file');
+        }
+     }
+    
     // fetch the issues from the web
     request.get(options, function(err, response, issueRespose) {
        
@@ -191,7 +206,7 @@ function getIssues(son, user, pass, callback) {
         if (response.statusCode != 200) {
             return callback(issueRespose.error || 'Error: ' + JSON.stringify(issueRespose));
         }
-
+            
         // we convert the issues in a common format
         // (I took the GitHub format as example)
         callback(null, provider.convertIssues(issueRespose));

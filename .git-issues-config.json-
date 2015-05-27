@@ -2,6 +2,6 @@
 // change the values.
 // remove these comments
 {
-	"username" : "yourusername",
-	"password" : "yourpassword"
+	"user" : "yourusername",
+	"pass" : "yourpassword"
 }
