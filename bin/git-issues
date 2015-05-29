@@ -3,33 +3,21 @@
 // Dependencies
 var GitIssues = require("../lib")
   , Table = require("le-table")
-  , Couleurs = require('couleurs')()
+  , Couleurs = require("couleurs")()
   , Clp = require("clp")
-  , Package = require("package")
+  , Package = require("../package")
+  , Logger = require("bug-killer")
+  , Ul = require("ul")
   ;
 
 // Table defaults
-Table.defaults.marks = {
-    nw: '┌'
-  , n:  '─'
-  , ne: '┐'
-  , e:  '│'
-  , se: '┘'
-  , s:  '─'
-  , sw: '└'
-  , w:  '│'
-  , b:  ' '
-  , mt: '┬'
-  , ml: '├'
-  , mr: '┤'
-  , mb: '┴'
-  , mm: '┼'
-};
+Logger.config.displayDate = false;
+Logger.config.logLevel = 4;
 
-var usernameOption = new Clp.Option(["u", "user"], "The GitHub username.", "username")
-  , passwordOption = new Clp.Option(["p", "password"], "The GitHub password or token.", "password")
+var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "username")
+  , passwordOption = new Clp.Option(["p", "password"], "The provider password or token.", "password")
   , repoOption = new Clp.Option(["r", "repo"], "The path to the repository.", "path", process.cwd())
-  , stateOption = new Clp.Option(["s", "state"], "The path to the repository.", "path")
+  , statusOption = new Clp.Option(["s", "status"], "The path to the repository.", "path")
   , parser = new Clp({
         name: "Git Issues"
       , version: Package.version
@@ -43,40 +31,65 @@ var usernameOption = new Clp.Option(["u", "user"], "The GitHub username.", "user
         ]
       , docs_url: "https://github.com/SoftwareScales/git-issues"
     }, [
-        usernameOption, passwordOption, repoOption, stateOption
+        usernameOption, passwordOption, repoOption, statusOption
     ])
   ;
 
-GitIssues.fromPath(repoOption.value, function (err, issues) {
+GitIssues.fromPath(repoOption.value, statusOption.value, {
+    username: usernameOption.value
+  , password: passwordOption.value
+}, function (err, issues) {
+    if (err) {
+        return Logger.log(err, "error");
+    }
 
+    if (!issues || issues.length === 0) {
+        Logger.log("No issues in this repository", "info");
+        process.exit(0);
+    }
+
+    var table = new Table({
+        marks: {
+            nw: "┌"
+          , n:  "─"
+          , ne: "┐"
+          , e:  "│"
+          , se: "┘"
+          , s:  "─"
+          , sw: "└"
+          , w:  "│"
+          , b:  " "
+          , mt: "┬"
+          , ml: "├"
+          , mr: "┤"
+          , mb: "┴"
+          , mm: "┼"
+        }
+    });
+
+    table.addRow([
+        Couleurs.bold("#")
+      , Couleurs.bold("Title")
+      , {
+            text: Couleurs.bold("Status")
+          , data: {
+                width: 10
+            }
+        }
+    ]);
+
+    issues.sort(function (a, b) {
+        return a.number > b.number;
+    });
+
+    issues.forEach(function (cI) {
+        table.addRow([cI.number, cI.title, {
+            text: cI.state.toUpperCase()
+          , data: {
+                width: 10
+            }
+        }]);
+    });
+
+    process.stdout.write(table.toString() + "\n");
 });
-//function issuesCallback(err, issues) {
-//
-//    if (err) {
-//        console.error(err);
-//        process.exit(3);
-//    }
-//
-//    if (!issues || issues.length === 0) {
-//        console.log('No issues in this repository');
-//        process.exit(0);
-//    }
-//
-//    var table = new Table();
-//    table.addRow([
-//        couleurs.bold('#'),
-//        couleurs.bold('Title'),
-//        couleurs.bold('Status')
-//    ]);
-//
-//    issues.sort(function (a, b) {
-//        return a.number > b.number;
-//    });
-//
-//    for (var i in issues) {
-//        var cI = issues[i];
-//        table.addRow([cI.number, cI.title, cI.state.toUpperCase()]);
-//    }
-//
-//    console.log(table.toString());
-//}
