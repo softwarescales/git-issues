@@ -8,27 +8,6 @@ var GitIssues = require("../lib")
   , Package = require("package")
   ;
 
-// Constants
-const CONFIG = {
-    promptSchema: {
-        properties: {
-            username: {
-                pattern: /^[a-zA-Z\s\-]+$/
-              , message: 'Name must be only letters, spaces, or dashes'
-            }
-          , password: {
-                description: 'Password:'
-              , hidden: true
-            }
-        }
-    }
-};
-
-// Configurations
-prompt.override = argv;
-prompt.message = '';
-prompt.delimiter = '';
-
 // Table defaults
 Table.defaults.marks = {
     nw: '┌'
@@ -71,5 +50,3 @@ var usernameOption = new Clp.Option(["u", "user"], "The GitHub username.", "user
 GitIssues.fromPath(repoOption.value, function (err, issues) {
 
 });
-
-GIT_URL=`git config --get remote.origin.url`
