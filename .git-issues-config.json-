@@ -1,0 +1,7 @@
+//rename this file to .git-issues-config.json and place it in your home directory
+// change the values.
+// remove these comments
+{
+	"user" : "yourusername",
+	"pass" : "yourpassword"
+}
