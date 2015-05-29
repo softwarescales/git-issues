@@ -50,3 +50,33 @@ var usernameOption = new Clp.Option(["u", "user"], "The GitHub username.", "user
 GitIssues.fromPath(repoOption.value, function (err, issues) {
 
 });
+//function issuesCallback(err, issues) {
+//
+//    if (err) {
+//        console.error(err);
+//        process.exit(3);
+//    }
+//
+//    if (!issues || issues.length === 0) {
+//        console.log('No issues in this repository');
+//        process.exit(0);
+//    }
+//
+//    var table = new Table();
+//    table.addRow([
+//        couleurs.bold('#'),
+//        couleurs.bold('Title'),
+//        couleurs.bold('Status')
+//    ]);
+//
+//    issues.sort(function (a, b) {
+//        return a.number > b.number;
+//    });
+//
+//    for (var i in issues) {
+//        var cI = issues[i];
+//        table.addRow([cI.number, cI.title, cI.state.toUpperCase()]);
+//    }
+//
+//    console.log(table.toString());
+//}
