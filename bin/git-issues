@@ -7,7 +7,6 @@ var GitIssues = require("../lib")
   , Clp = require("clp")
   , Package = require("../package")
   , Logger = require("bug-killer")
-  , Ul = require("ul")
   ;
 
 // Table defaults
