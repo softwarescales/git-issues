@@ -1,6 +1,6 @@
 {
   "name": "git-issues",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "Git issues extension to list issues of a Git project",
   "main": "index.js",
   "repository": {
@@ -16,61 +16,29 @@
   "bin": {
     "git-issues": "./bin/git-issues"
   },
-  "author": {
-    "name": "Gabriel Petrovay",
-    "email": "gabipetrovay@gmail.com"
-  },
+  "author": "Gabriel Petrovay <gabipetrovay@gmail.com>",
   "contributors": [
-    {
-      "name": "Ionică Bizău",
-      "email": "bizauionica@gmail.com"
-    },
-    {
-      "name" : "Arno Chauveau",
-      "email" : "arnochauveau@gmail.com" 
-    }
+    "Ionică Bizău <bizauionica@gmail.com>",
+    "Arno Chauveau <arnochauveau@gmail.com>"
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/softwarescales/git-issues/issues"
   },
   "homepage": "https://github.com/softwarescales/git-issues",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "le-table": "2.1.0",
-    "couleurs": "3.0.0",
-    "prompt": "0.2.14",
-    "optimist": "0.6.1",
-    "request": "2.55.0",
-    "giturlparse": "1.2.0"
+    "bug-killer": "^1.0.0",
+    "clp": "^1.2.0",
+    "couleurs": "^3.0.0",
+    "giturlparse": "^1.2.0",
+    "gry": "^2.1.0",
+    "is-there": "^2.0.0",
+    "le-table": "^2.2.0",
+    "request": "^2.55.0",
+    "ul": "^2.1.0"
   },
   "devDependencies": {},
-  "gitHead": "d73b98a25ce7a7f47ca71c3b13e5a49d3bdb97a2",
-  "_id": "git-issues@0.7.0",
-  "_shasum": "09e4bf1d2026f78dab212962b7329437215445ec",
-  "_from": "git-issues@*",
-  "_npmVersion": "1.4.28",
-  "_npmUser": {
-    "name": "ionicabizau",
-    "email": "bizauionica@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "gabipetrovay",
-      "email": "gabipetrovay@gmail.com"
-    },
-    {
-      "name": "ionicabizau",
-      "email": "bizauionica@yahoo.com"
-    }
-  ],
-  "dist": {
-    "shasum": "09e4bf1d2026f78dab212962b7329437215445ec",
-    "tarball": "http://registry.npmjs.org/git-issues/-/git-issues-0.7.0.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/git-issues/-/git-issues-0.7.0.tgz",
-  "readme": "ERROR: No README data found!"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
