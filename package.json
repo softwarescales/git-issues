@@ -2,7 +2,7 @@
   "name": "git-issues",
   "version": "1.0.0",
   "description": "Git issues extension to list issues of a Git project",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/softwarescales/git-issues.git"
