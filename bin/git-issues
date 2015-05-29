@@ -1,22 +1,75 @@
-#!/bin/bash
+#!/usr/bin/env node
 
-REPO_DIR=`git rev-parse --show-toplevel`
-if [ $? -gt 0 ]
-then
-    exit
-fi
+// Dependencies
+var GitIssues = require("../lib")
+  , Table = require("le-table")
+  , Couleurs = require('couleurs')()
+  , Clp = require("clp")
+  , Package = require("package")
+  ;
+
+// Constants
+const CONFIG = {
+    promptSchema: {
+        properties: {
+            username: {
+                pattern: /^[a-zA-Z\s\-]+$/
+              , message: 'Name must be only letters, spaces, or dashes'
+            }
+          , password: {
+                description: 'Password:'
+              , hidden: true
+            }
+        }
+    }
+};
+
+// Configurations
+prompt.override = argv;
+prompt.message = '';
+prompt.delimiter = '';
+
+// Table defaults
+Table.defaults.marks = {
+    nw: '┌'
+  , n:  '─'
+  , ne: '┐'
+  , e:  '│'
+  , se: '┘'
+  , s:  '─'
+  , sw: '└'
+  , w:  '│'
+  , b:  ' '
+  , mt: '┬'
+  , ml: '├'
+  , mr: '┤'
+  , mb: '┴'
+  , mm: '┼'
+};
+
+var usernameOption = new Clp.Option(["u", "user"], "The GitHub username.", "username")
+  , passwordOption = new Clp.Option(["p", "password"], "The GitHub password or token.", "password")
+  , repoOption = new Clp.Option(["r", "repo"], "The path to the repository.", "path", process.cwd())
+  , stateOption = new Clp.Option(["s", "state"], "The path to the repository.", "path")
+  , parser = new Clp({
+        name: "Git Issues"
+      , version: Package.version
+      , process: true
+      , exe: Package.name
+      , examples: [
+            "git-issues # No authentification for public repositories"
+          , "git-issues -u your-username -p 'your-password'"
+          , "git-issues -r ../another-repository"
+          , "git-issues -s 'assigned'"
+        ]
+      , docs_url: "https://github.com/SoftwareScales/git-issues"
+    }, [
+        usernameOption, passwordOption, repoOption, stateOption
+    ])
+  ;
+
+GitIssues.fromPath(repoOption.value, function (err, issues) {
+
+});
 
 GIT_URL=`git config --get remote.origin.url`
-
-INSTALLED_LOCATION=$0
-INSTALLED_DIR=`dirname "$INSTALLED_LOCATION"`
-
-if [ -L "$INSTALLED_LOCATION" ]
-then
-    INSTALLED_LOCATION=`readlink "$INSTALLED_LOCATION"`
-    # readlink returns a relative path
-    INSTALLED_DIR=`dirname "$0"`/`dirname "$INSTALLED_LOCATION"`
-fi
-
-node "$INSTALLED_DIR/../index.js" $@ --repo "$GIT_URL"
-
