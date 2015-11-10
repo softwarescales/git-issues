@@ -27,15 +27,15 @@
   },
   "homepage": "https://github.com/softwarescales/git-issues",
   "dependencies": {
-    "bug-killer": "^1.0.0",
-    "clp": "^1.2.0",
-    "couleurs": "^3.0.0",
-    "giturlparse": "^1.2.0",
-    "gry": "^2.1.0",
-    "is-there": "^2.0.0",
-    "le-table": "^2.2.0",
-    "request": "^2.55.0",
-    "ul": "^2.1.0"
+    "abs": "^1.0.0",
+    "bug-killer": "^4.0.0",
+    "clp": "^3.0.0",
+    "couleurs": "^5.0.0",
+    "git-url-parse": "^4.0.0",
+    "gry": "^4.1.0",
+    "is-there": "^4.1.0",
+    "le-table": "^4.0.0",
+    "request": "^2.55.0"
   },
   "devDependencies": {},
   "scripts": {
