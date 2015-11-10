@@ -40,6 +40,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "./bin/git-issues -r https://github.com/softwarescales/git-issues"
+    "demo": "./bin/git-issues -r https://github.com/softwarescales/git-issues",
+    "jquery-demo": "./bin/git-issues -r https://github.com/jquery/jquery.git"
   }
 }

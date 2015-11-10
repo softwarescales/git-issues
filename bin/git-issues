@@ -34,6 +34,14 @@ var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "us
     ])
   ;
 
+function labelsFor(issue) {
+  return (issue.labels || []).map(function (label) {
+    return label.name;
+  }).filter(function (labelName) {
+    return labelName;
+  }).join(",");
+}
+
 GitIssues.fromPath(repoOption.value, statusOption.value, {
     username: usernameOption.value
   , password: passwordOption.value
@@ -68,6 +76,7 @@ GitIssues.fromPath(repoOption.value, statusOption.value, {
 
     table.addRow([
         Couleurs.bold("#")
+      , Couleurs.bold("Label(s)")
       , Couleurs.bold("Title")
       , {
             text: Couleurs.bold("Status")
@@ -82,12 +91,19 @@ GitIssues.fromPath(repoOption.value, statusOption.value, {
     });
 
     issues.forEach(function (cI) {
-        table.addRow([cI.number, cI.title, {
-            text: cI.state.toUpperCase()
-          , data: {
+        // TODO Table seems to break if the string is undefined or empty
+        var labels = labelsFor(cI) || " ";
+        table.addRow([
+            cI.number,
+            labels,
+            cI.title,
+            {
+              text: cI.state.toUpperCase()
+            , data: {
                 width: 10
+              }
             }
-        }]);
+          ]);
     });
 
     process.stdout.write(table.toString() + "\n");
