@@ -54,6 +54,12 @@ $ git issues -h
 
 :bulb: The credentials are stored in `~/.git-issues.json`.
 
+Fetch issues for any public repo (try it by running `npm run demo` from this repo)
+
+```
+$ git-issues -r https://github.com/softwarescales/git-issues
+```
+
 ## Documentation
 ### `fromProvider(providerName, user, repo, status, auth, callback)`
 Fetches the issues from provider.
