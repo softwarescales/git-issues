@@ -87,7 +87,7 @@ GitIssues.fromPath(repoOption.value, statusOption.value, {
     ]);
 
     issues.sort(function (a, b) {
-        return a.number > b.number;
+        return a.number - b.number;
     });
 
     issues.forEach(function (cI) {
