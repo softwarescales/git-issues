@@ -16,7 +16,7 @@ Logger.config.logLevel = 4;
 var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "username")
   , passwordOption = new Clp.Option(["p", "password"], "The provider password or token.", "password")
   , repoOption = new Clp.Option(["r", "repo"], "The path to the repository.", "path", process.cwd())
-  , statusOption = new Clp.Option(["s", "status"], "The path to the repository.", "path")
+  , statusOption = new Clp.Option(["s", "status"], "The status of the issue.", "status")
   , parser = new Clp({
         name: "Git Issues"
       , version: Package.version
@@ -26,7 +26,7 @@ var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "us
             "git-issues # No authentification for public repositories"
           , "git-issues -u your-username -p 'your-password'"
           , "git-issues -r ../another-repository"
-          , "git-issues -s 'assigned'"
+          , "git-issues -s 'closed'"
         ]
       , docs_url: "https://github.com/SoftwareScales/git-issues"
     }, [
