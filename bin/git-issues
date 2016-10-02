@@ -28,6 +28,7 @@ var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "us
           , "git-issues -u your-username -p 'your-password'"
           , "git-issues -r ../another-repository"
           , "git-issues -s 'closed'"
+          , "git-issues -l enhancement,bug"
         ]
       , docs_url: "https://github.com/SoftwareScales/git-issues"
     }, [
