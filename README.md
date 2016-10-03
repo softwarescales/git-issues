@@ -26,7 +26,8 @@ Options:
   -u, --user <username>      The provider username.
   -p, --password <password>  The provider password or token.
   -r, --repo <path>          The path to the repository.
-  -s, --status <path>        The path to the repository.
+  -s, --status <status>      The status of the issue.
+  -l, --label <label>        The label(s) to search for.
   -h, --help                 Displays this help.
   -v, --version              Displays version information.
 
@@ -34,7 +35,8 @@ Examples:
   git-issues # No authentification for public repositories
   git-issues -u your-username -p 'your-password'
   git-issues -r ../another-repository
-  git-issues -s 'assigned'
+  git-issues -s 'closed'
+  git-issues -l enhancement,bug
 
 Documentation can be found at https://github.com/SoftwareScales/git-issues
 ```
