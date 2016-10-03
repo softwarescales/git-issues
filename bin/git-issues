@@ -16,7 +16,8 @@ Logger.config.logLevel = 4;
 var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "username")
   , passwordOption = new Clp.Option(["p", "password"], "The provider password or token.", "password")
   , repoOption = new Clp.Option(["r", "repo"], "The path to the repository.", "path", process.cwd())
-  , statusOption = new Clp.Option(["s", "status"], "The path to the repository.", "path")
+  , statusOption = new Clp.Option(["s", "status"], "The status of the issue.", "status")
+  , labelOption = new Clp.Option(["l", "label"], "The label(s) to search for.", "label")
   , parser = new Clp({
         name: "Git Issues"
       , version: Package.version
@@ -26,11 +27,12 @@ var usernameOption = new Clp.Option(["u", "user"], "The provider username.", "us
             "git-issues # No authentification for public repositories"
           , "git-issues -u your-username -p 'your-password'"
           , "git-issues -r ../another-repository"
-          , "git-issues -s 'assigned'"
+          , "git-issues -s 'closed'"
+          , "git-issues -l enhancement,bug"
         ]
       , docs_url: "https://github.com/SoftwareScales/git-issues"
     }, [
-        usernameOption, passwordOption, repoOption, statusOption
+        usernameOption, passwordOption, repoOption, statusOption, labelOption
     ])
   ;
 
@@ -89,6 +91,14 @@ GitIssues.fromPath(repoOption.value, statusOption.value, {
     issues.sort(function (a, b) {
         return a.number - b.number;
     });
+
+    if (labelOption.value) {
+      labels = labelOption.value.split(',');
+      issues = issues.filter(issue => {
+        var filterLabels = issue.labels.filter(({name}) => labels.indexOf(name) !== -1);
+        return filterLabels.length > 0;
+      });
+    }
 
     issues.forEach(function (cI) {
         // TODO Table seems to break if the string is undefined or empty
