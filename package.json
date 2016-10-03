@@ -1,6 +1,6 @@
 {
   "name": "git-issues",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Git issues extension to list issues of a Git project",
   "main": "lib/index.js",
   "repository": {
