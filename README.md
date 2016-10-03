@@ -1,100 +1,62 @@
-# git-issues
-Git issues extension to list issues of a Git project
 
-[![NPM](https://nodei.co/npm/git-issues.png)](https://nodei.co/npm/git-issues/)
+# `$ git-issues`
 
-## Installation
-Install globally to have it automatically work (this command will probably
-require a `sudo`):
+ [![Version](https://img.shields.io/npm/v/git-issues.svg)](https://www.npmjs.com/package/git-issues) [![Downloads](https://img.shields.io/npm/dt/git-issues.svg)](https://www.npmjs.com/package/git-issues)
 
-```sh
-npm install -g git-issues
-```
+> Git issues extension to list issues of a Git project
 
-Or you can clone this repository locally:
+## :cloud: Installation
+
+You can install the package globally and use it as command line tool:
+
 
 ```sh
-$ git clone git://github.com/softwarescales/git-issues.git git-issues
-$ cd git-issues
-$ npm install
-$ ./bin/git-issues --help
-# Optionally, you can use this installation globally using:
-$ npm link
+$ npm i -g git-issues
 ```
 
-## Usage
-For public repositories:
+
+Then, run `git-issues --help` and see what the CLI tool can do.
+
 
 ```
-$ git issues
-┌──┬─────────────────────────────────────────────────────────────────────────┬────────┐
-│# │Title                                                                    │Status  │
-├──┼─────────────────────────────────────────────────────────────────────────┼────────┤
-│1 │Test issue Open (Do not close!)                                          │OPEN    │
-├──┼─────────────────────────────────────────────────────────────────────────┼────────┤
-│7 │Cache user & password or access token into a file                        │OPEN    │
-├──┼─────────────────────────────────────────────────────────────────────────┼────────┤
-│10│feature #7                                                               │OPEN    │
-├──┼─────────────────────────────────────────────────────────────────────────┼────────┤
-│11│Error: Cannot find module '/usr/bin/lib/node_modules/git-issues/index.js'│OPEN    │
-└──┴─────────────────────────────────────────────────────────────────────────┴────────┘
+$ git-issues --help
+Usage: git-issues [options]
+
+Options:
+  -u, --user <username>      The provider username.
+  -p, --password <password>  The provider password or token.
+  -r, --repo <path>          The path to the repository.
+  -s, --status <path>        The path to the repository.
+  -h, --help                 Displays this help.
+  -v, --version              Displays version information.
+
+Examples:
+  git-issues # No authentification for public repositories
+  git-issues -u your-username -p 'your-password'
+  git-issues -r ../another-repository
+  git-issues -s 'assigned'
+
+Documentation can be found at https://github.com/SoftwareScales/git-issues
 ```
 
-For private repositories you must provide your Git provider username and password.
+## :memo: Documentation
 
-```
-$ git issues -u your-username -p 'your-password'
-```
+For full API reference, see the [DOCUMENTATION.md][docs] file.
 
-For more information about how to use this tool run:
+## :yum: How to contribute
+Have an idea? Found a bug? See [how to contribute][contributing].
 
-```sh
-$ git issues -h
-```
+## :dizzy: Where is this library used?
+If you are using this library in one of your projects, add it in this list. :sparkles:
 
-:bulb: The credentials are stored in `~/.git-issues.json`.
 
-Fetch issues for any public repo (try it by running `npm run demo` from this repo)
+ - [`git-egylet`](https://github.com/kzhunbp/git-egylet#readme) (by kzhunbp)—Use git more easier
 
-```
-$ git-issues -r https://github.com/softwarescales/git-issues
-```
+## :scroll: License
 
-## Documentation
-### `fromProvider(providerName, user, repo, status, auth, callback)`
-Fetches the issues from provider.
+[MIT][license] © [Gabriel Petrovay][website]
 
-#### Params
-- **String** `providerName`: The provider name (currently supported `"bitbucket"` and `"github"`).
-- **String** `user`: The repository owner.
-- **String** `repo`: The repository name.
-- **String** `status`: The issue status.
-- **Object** `auth`: The authorization object:
- - `username` (String): The provider username.
- - `password` (String): The provider password/token.
-
-- **Function** `callback`: The callback function.
-
-### `fromPath(path, status, auth, callback)`
-Fetches the issues by passing the local repository path.
-
-#### Params
-- **String** `path`: The path to the local repository.
-- **String** `status`: The issue status.
-- **Object** `auth`: The authorization object:
- - `username` (String): The provider username.
- - `password` (String): The provider password/token.
-- **Function** `callback`: The callback function.
-
-## How to contribute
-1. File an issue in the repository, using the bug tracker, describing the
-   contribution you'd like to make. This will help us to get you started on the
-   right foot.
-2. Fork the project in your account and create a new branch:
-   `your-great-feature`.
-3. Commit your changes in that branch.
-4. Open a pull request, and reference the initial issue in the pull request
-   message.
-
-## License
-See the [LICENSE](./LICENSE) file.
+[license]: http://showalicense.com/?fullname=Gabriel%20Petrovay%20%3Cgabipetrovay%40gmail.com%3E&year=2013#license-mit
+[website]:
+[contributing]: /CONTRIBUTING.md
+[docs]: /DOCUMENTATION.md
