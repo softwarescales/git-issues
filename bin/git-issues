@@ -95,7 +95,7 @@ GitIssues.fromPath(repoOption.value, statusOption.value, {
     if (labelOption.value) {
       labels = labelOption.value.split(',');
       issues = issues.filter(issue => {
-        var filterLabels = issue.labels.filter((label) => labels.indexOf(label.name) !== -1);
+        var filterLabels = issue.labels.filter(label => labels.indexOf(label.name) !== -1);
         return filterLabels.length > 0;
       });
     }
